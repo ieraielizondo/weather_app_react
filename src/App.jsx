@@ -1,6 +1,6 @@
 
 import { useState } from 'react'
-import './App.css'
+import './css/index.css'
 
 function App() {
   const ejemplo={
@@ -50,6 +50,7 @@ function App() {
   const urlBase="https://api.openweathermap.org/data/2.5/weather?q="
   const urlBaseIconos="https://openweathermap.org/img/wn/"
   const API_KEY="f9964e15e133c48856f04426a4de4ba4"
+  let viento=""
 
   const [ciudad, setCiudad] = useState('')
   const [dataClima, setDataClima] = useState(null)
@@ -58,11 +59,11 @@ function App() {
     console.log(e.target.value)
     setCiudad(e.target.value)
   }
-const handleSubmit=(e)=>{
-  e.preventDefault()
-  if(ciudad.length>0) fetchClima()
+  const handleSubmit=(e)=>{
+    e.preventDefault()
+    if(ciudad.length>0) fetchClima()
 
-}
+  }
 
   const fetchClima = async()=>{
     const url=urlBase+ciudad+"&units=metric&lang=es&appid="+API_KEY
@@ -78,30 +79,35 @@ const handleSubmit=(e)=>{
 
   return (
     <>
-      <p>App del tiempo tope de gama</p>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="ciudad"
-          value={ciudad}
-          placeholder='Ciudad'
-          onChange={handleCambioCiudad}
+      <div className="main">
+        <h1>App del tiempo tope de gama</h1>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="text"
+            name="ciudad"
+            value={ciudad}
+            placeholder='Ciudad'
+            onChange={handleCambioCiudad}
 
-        />
-        <button type='submit'>Buscar</button>
-      </form>
-      {
-        dataClima &&(
-          <div>
-            <h2>{dataClima.name}, {dataClima.main.temp}ºC</h2>
-            <p>Condición metereológica: {dataClima.weather[0].description} </p>
-            <img src={urlBaseIconos+dataClima.weather[0].icon+"@2x.png"}></img>
+          />
+          <button type='submit'>Buscar</button>
+        </form>
+        {
+          dataClima &&(
+            <div className='climaContent'>
+              <img src={urlBaseIconos+dataClima.weather[0].icon+"@2x.png"}></img><h2>{dataClima.name}, {dataClima.main.temp}ºC</h2>
+              <p>Condición metereológica: {dataClima.weather[0].description} </p>
+              
+              <p>Presión: {dataClima.main.pressure}</p>
+              <p>Viento: <span style={{rotate:ejemplo.wind.deg+"deg"}}  className="viento"></span> {ejemplo.wind.speed} km/h, dirección {dataClima.wind.deg}º</p>
 
-          </div>
-          
-          
-        )
-      }
+            </div>
+            
+            
+          )
+        }
+      </div>
+      
     </>
   )
 }

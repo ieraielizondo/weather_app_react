@@ -25,20 +25,27 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.main{
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+
 }
 form{
   display: flex;
   flex-direction: row;
   gap: 10px;
+  width: 50%;
+  justify-content: flex-start;
+}
+form input[type="text" ]{
+  width: 60%;
+  border-radius: 8px; 
+  border: 1px solid #dedede; 
 }
 
 button {
@@ -59,16 +66,49 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+.climaContent{
+  background-color: #cec9c9;
+  border: 1px solid grey;
+  max-width: 1300px;
+  width: 50%;
+  margin: 10px auto;
+  padding: 10px;
+  color: #242424;
+  border-radius: 12px;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  -ms-border-radius: 12px;
+  -o-border-radius: 12px;
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+}
+.viento{
+  background-image: url(/src/assets/flecha.svg);
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  background-position: center;
+}
+.viento_N{
+  rotate: 0deg;
+}
+.viento_N_E{
+  rotate: 45deg;
+}
+.viento_E{
+  rotate: 90deg;
+}
+.viento_S_E{
+  rotate: 135deg;
+}
+.viento_S{
+  rotate: 180deg;
+}
+.viento_S_O{
+  rotate: 225deg;  
+}
+.viento_O{
+  rotate: 270deg;
+}
+.viento_N_O{
+  rotate: 315deg;
 }
